@@ -1,4 +1,4 @@
-package com.geek.select;
+package com.geek.sort.select;
 
 import com.geek.sort.Student;
 

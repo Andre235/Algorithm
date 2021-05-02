@@ -1,7 +1,6 @@
-package com.geek.select;
+package com.geek.sort.select;
 
 import com.geek.sort.Student;
-import com.geek.sort.bubble.BubbleSort;
 
 /**
  * @author: 赵静超
