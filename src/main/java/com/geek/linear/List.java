@@ -57,4 +57,10 @@ public interface List<E> extends Iterable<E> {
      * @return 索引
      */
     int indexOf(E element);
+
+    /**
+     * 顺序表扩缩容
+     * @param newCapacity 新的顺序表容量
+     */
+    void resize(int newCapacity);
 }

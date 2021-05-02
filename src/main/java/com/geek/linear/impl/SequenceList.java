@@ -19,7 +19,7 @@ public class SequenceList<E> implements List<E> {
      */
     private E[] elements;
     /**
-     * 线性表长度
+     * 元素个数
      */
     private int length;
 
@@ -51,6 +51,9 @@ public class SequenceList<E> implements List<E> {
 
     @Override
     public void insert(int index, E element) {
+        if(this.length > this.elements.length) {
+            resize(this.elements.length * 2);
+        }
         // 把index索引位置以后的所有元素依次向后移动一位即可
         for (int i = this.length; i > index ; i--) {
             this.elements[i] = this.elements[i - 1];
@@ -62,6 +65,9 @@ public class SequenceList<E> implements List<E> {
 
     @Override
     public void insert(E element) {
+        if(this.length == this.elements.length) {
+            resize(this.elements.length * 2);
+        }
         this.elements[this.length ++] = element;
     }
 
@@ -77,6 +83,10 @@ public class SequenceList<E> implements List<E> {
 
         // 数组的容量减一
         this.length --;
+
+        if(this.length <= this.elements.length / 4) {
+            resize(this.elements.length / 2);
+        }
         return element;
     }
 
@@ -88,6 +98,18 @@ public class SequenceList<E> implements List<E> {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void resize(int newCapacity) {
+        // 创建一个临时顺序表
+        E[] temp = this.elements;
+        // 创建一个新的具有合适容量的数组
+        this.elements = (E[]) new Object[newCapacity];
+        // 把旧数组元素拷贝至新数组当中
+        for (int i = 0; i < this.length; i++) {
+            this.elements[i] = temp[i];
+        }
     }
 
     @Override

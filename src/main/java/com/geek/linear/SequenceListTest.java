@@ -16,15 +16,14 @@ public class SequenceListTest {
         list.insert("姚明");
         list.insert("科比");
         list.insert("麦迪");
-        list.insert(1,"汤姆斯");
+        list.insert("汤姆斯");
         System.out.println(list);
 
         list.remove(0);
         System.out.println(list);
 
+        list.remove(0);
+        System.out.println(list);
 
-        for (String s : list) {
-            System.out.println(s);
-        }
     }
 }
