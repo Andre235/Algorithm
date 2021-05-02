@@ -1,7 +1,6 @@
-package com.geek.linear.impl;
+package com.geek.list.linear;
 
-import com.geek.linear.List;
-import lombok.Data;
+import com.geek.list.List;
 import lombok.ToString;
 
 import java.util.Iterator;
@@ -114,7 +113,7 @@ public class SequenceList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new SIterator();
     }
 
     private class SIterator implements Iterator<E> {

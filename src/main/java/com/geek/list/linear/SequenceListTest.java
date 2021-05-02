@@ -1,8 +1,6 @@
-package com.geek.linear;
+package com.geek.list.linear;
 
-import com.geek.linear.impl.SequenceList;
-
-import java.util.ArrayList;
+import com.geek.list.List;
 
 /**
  * @author: 赵静超
@@ -17,13 +15,16 @@ public class SequenceListTest {
         list.insert("科比");
         list.insert("麦迪");
         list.insert("汤姆斯");
-        System.out.println(list);
+//        System.out.println(list);
+//
+//        list.remove(0);
+//        System.out.println(list);
+//
+//        list.remove(0);
+//        System.out.println(list);
 
-        list.remove(0);
-        System.out.println(list);
-
-        list.remove(0);
-        System.out.println(list);
-
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 }

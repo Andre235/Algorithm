@@ -1,4 +1,4 @@
-package com.geek.linear;
+package com.geek.list;
 
 import java.util.Iterator;
 
