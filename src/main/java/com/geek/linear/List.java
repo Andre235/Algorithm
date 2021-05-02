@@ -1,11 +1,13 @@
 package com.geek.linear;
 
+import java.util.Iterator;
+
 /**
  * @author: 赵静超
  * @date: 2021/5/2 14:58
  * @description:
  */
-public interface List<E> {
+public interface List<E> extends Iterable<E> {
 
     /**
      * 清空线性表

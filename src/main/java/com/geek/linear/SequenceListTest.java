@@ -2,6 +2,8 @@ package com.geek.linear;
 
 import com.geek.linear.impl.SequenceList;
 
+import java.util.ArrayList;
+
 /**
  * @author: 赵静超
  * @date: 2021/5/2 15:36
@@ -19,5 +21,10 @@ public class SequenceListTest {
 
         list.remove(0);
         System.out.println(list);
+
+
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 }

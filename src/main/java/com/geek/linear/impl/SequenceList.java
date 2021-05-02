@@ -4,6 +4,8 @@ import com.geek.linear.List;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.Iterator;
+
 /**
  * @author: 赵静超
  * @date: 2021/5/2 14:59
@@ -22,8 +24,8 @@ public class SequenceList<E> implements List<E> {
     private int length;
 
 
-    public SequenceList(int length) {
-        this.elements  = (E[]) new Object[length];
+    public SequenceList(int capacity) {
+        this.elements  = (E[]) new Object[capacity];
         this.length = 0;
     }
 
@@ -86,5 +88,28 @@ public class SequenceList<E> implements List<E> {
             }
         }
         return -1;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    private class SIterator implements Iterator<E> {
+        private int cursor;
+
+        public SIterator() {
+            this.cursor = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.cursor > length;
+        }
+
+        @Override
+        public E next() {
+            return elements[cursor ++];
+        }
     }
 }
