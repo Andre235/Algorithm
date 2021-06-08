@@ -18,7 +18,6 @@ public class TwoWayLinkedList<E> implements List<E> {
 
     private int length;
 
-
     public TwoWayLinkedList() {
         this.head = new Node<E>(null, null, null);
         this.last = null;
@@ -93,14 +92,19 @@ public class TwoWayLinkedList<E> implements List<E> {
     public void insert(E element) {
         // 如果链表为空
         if(this.isEmpty()) {
+            // 创建新节点
             Node<E> newNode = new Node<>(element, this.head, null);
+            // 让新节点称为尾结点
             this.last = newNode;
+            // 让新节点指向尾结点
             this.head.next = newNode;
         } else { // 如果链表不为空
+            // 创建临时尾结点
+            Node<E> oldNode = last;
             // 创建新节点
-            Node<E> newNode = new Node<>(element, this.last, null);
+            Node<E> newNode = new Node<>(element, oldNode, null);
             // 当前的尾结点指向新创建的节点
-            this.last.next= newNode;
+            oldNode.next = newNode;
             // 让新节点成为尾结点
             this.last = newNode;
         }
@@ -109,7 +113,34 @@ public class TwoWayLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        // 判断列表是否为空，为空则直接返回null
+        if(isEmpty() || index > length - 1) {
+            return null;
+        }
+        // 找到index位置处的前一个节点
+        Node<E> pre = head;
+        for (int i = 0; i < index; i++) {
+            pre = pre.next;
+        }
+        // 要删除索引位置处的节点是否为last节点
+        E result = null;
+        if(length -1  == index) { // 要删除索引位置上的元素为链表的最后一个元素
+            pre.next = null;
+            last = pre;
+            result = pre.data;
+        }else { // 要删除索引位置上的元素不是链表的最后一个元素
+            // 找到index位置处的节点
+            Node<E> currentNode = pre.next;
+            // 找到index位置处的下一个节点
+            Node<E> nextNode = currentNode.next;
+            // 让index位置处的上一个节点的后继节点 指向index位置处的下一个节点
+            pre.next = nextNode;
+            // 让index位置处的下一个节点的前驱节点 指向index位置处的上一个节点
+            nextNode.pre = pre;
+            result = currentNode.data;
+        }
+        length --;
+        return result;
     }
 
     @Override
@@ -131,7 +162,26 @@ public class TwoWayLinkedList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new TIterator();
+    }
+
+    private class TIterator implements Iterator<E> {
+        private Node<E> node;
+
+        public TIterator() {
+            this.node = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return node.next != null;
+        }
+
+        @Override
+        public E next() {
+            node = node.next;
+            return node.data;
+        }
     }
 
     /**
