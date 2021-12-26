@@ -11,22 +11,21 @@ import java.util.Iterator;
  */
 public class LinkedListTest {
     public static void main(String[] args) {
-        List<String> list = new LinkedList<>();
+        LinkedList<String> list = new LinkedList<>();
 
         list.insert("姚明");
         list.insert("科比");
         list.insert("麦迪");
-        list.insert(1,"汤姆斯");
+        list.insert("汤姆斯");
 
-//        System.out.println(list);
-//        System.out.println(list.get(0));
-//        System.out.println(list.get(1));
-//        list.remove(1);
-//        System.out.println(list);
+        for (String s : list) {
+            System.out.println(s);
+        }
+        System.out.println("-----------------------");
 
-
-//        for (String s : list) {
-//            System.out.println(s);
-//        }
+        list.reverse();
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 }

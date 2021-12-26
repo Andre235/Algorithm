@@ -52,7 +52,7 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void insert(int index, T element) {
         // 找到index索引处的前一个节点
-        Node<T> preNode = this.head;
+        Node<T> preNode = this.head.next;
         for (int i = 0; i < index - 1; i++) {
             preNode = preNode.next;
         }
@@ -78,12 +78,14 @@ public class LinkedList<T> implements List<T> {
     public void insert(T element) {
         // 找出当前链表中的最后一个节点
         Node<T> node = this.head;
-        if(node.data == null) {
-            node.data = element;
-            // 链表长度加一
-            this.length ++;
-            return;
-        }
+
+        // TODO 测试这个判断是否多余？
+//        if(node.data == null) {
+//            node.data = element;
+//            // 链表长度加一
+//            this.length ++;
+//            return;
+//        }
         while (node.next != null) {
             node = node.next;
         }
@@ -110,7 +112,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public int indexOf(T element) {
-        Node<T> node = this.head;
+        Node<T> node = this.head.next;
         int index = 0;
         while (node.next != null) {
             if(element.equals(node.data)){
@@ -125,6 +127,34 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void resize(int newCapacity) {
 
+    }
+
+    /**
+     * 对整个链表进行反转
+     */
+    public void reverse() {
+        if (isEmpty() || length == 1) {
+            return;
+        }
+        reverse(head.next);
+    }
+
+    /**
+     * 反转指定节点 currentNode，并且把反转后的节点返回
+     * @param currentNode
+     * @return
+     */
+    public Node<T> reverse(Node<T> currentNode) {
+        if (currentNode.next == null) {
+            head.next = currentNode;
+            return currentNode;
+        }
+        // 递归反转当前节点的下一个节点，返回值就是链表反转后当前节点的上一个节点
+        Node<T> preNode = reverse(currentNode.next);
+        // 让返回的节点的下一个节点变为当前节点
+        preNode.next = currentNode;
+        currentNode.next = null;
+        return currentNode;
     }
 
     @Override

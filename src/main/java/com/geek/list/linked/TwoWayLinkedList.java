@@ -160,6 +160,34 @@ public class TwoWayLinkedList<E> implements List<E> {
 
     }
 
+    /**
+     * 对整个链表进行反转
+     */
+    public void reverse() {
+        if (isEmpty() || length == 1) {
+            return;
+        }
+        reverse(head.next);
+    }
+
+    /**
+     * 反转指定节点 currentNode，并且把反转后的节点返回
+     * @param currentNode
+     * @return
+     */
+    public Node<E> reverse(Node<E> currentNode) {
+        if (currentNode.next == null) {
+            head.next = currentNode;
+            return currentNode;
+        }
+        // 递归反转当前节点的下一个节点，返回值就是链表反转后当前节点的上一个节点
+        Node<E> preNode = reverse(currentNode.next);
+        // 让返回的节点的下一个节点变为当前节点
+        preNode.next = currentNode;
+        currentNode.next = null;
+        return currentNode;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new TIterator();
@@ -191,13 +219,13 @@ public class TwoWayLinkedList<E> implements List<E> {
     @ToString
     private static class Node<E> {
         /**
-         * 数据域
-         */
-        private E data;
-        /**
          * 前驱指针域
          */
         private Node<E> pre;
+        /**
+         * 数据域
+         */
+        private E data;
         /**
          * 后继指针域
          */
