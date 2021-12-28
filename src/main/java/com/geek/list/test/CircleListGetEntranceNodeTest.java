@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @author: lucas.zhao@kuhantech.com
  * @date: 2021/12/28 14:11
- * @description:
+ * @description: 获取环形链表的入口节点
  */
 @SuppressWarnings("all")
 public class CircleListGetEntranceNodeTest {

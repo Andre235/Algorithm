@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @author: lucas.zhao@kuhantech.com
  * @date: 2021/12/28 14:11
- * @description:
+ * @description: 环形链表检查
  */
 @SuppressWarnings("all")
 public class CircleListCheckTest {

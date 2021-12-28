@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * @author: lucas.zhao@kuhantech.com
  * @date: 2021/12/27 17:56
- * @description:
+ * @description: 快慢指针获取中间值问题
  */
 public class FastSlowTest {
     public static void main(String[] args) {

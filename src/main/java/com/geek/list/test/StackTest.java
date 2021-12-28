@@ -5,7 +5,7 @@ import com.geek.list.linked.Stack;
 /**
  * @author: lucas.zhao@kuhantech.com
  * @date: 2021/12/28 20:01
- * @description:
+ * @description: 栈API测试
  */
 public class StackTest {
     public static void main(String[] args) {
