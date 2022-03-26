@@ -278,6 +278,47 @@ public class BinaryTree<K extends Comparable<K>, V> {
     }
 
     /**
+     * 获取整个树的最大深度
+     * @return
+     */
+    public int maxDepth() {
+        if (root == null) {
+            return 0;
+        }
+        return maxDepth(root);
+    }
+
+    /**
+     * 获取指定树node的最大深度
+     * @param node
+     * @return
+     */
+    public int maxDepth(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        // node节点的最大深度
+        int nodeMaxDepth = 0;
+        // node节点的左子树的最大深度
+        int leftTreeMaxDepth = 0;
+        // node节点的右子树的最大深度
+        int rightTreeMaxDepth = 0;
+
+        // 计算左子树的最大深度
+        if (node.left != null) {
+            leftTreeMaxDepth = maxDepth(node.left);
+        }
+        // 计算右子树的最大深度
+        if (node.right != null) {
+            rightTreeMaxDepth = maxDepth(node.right);
+        }
+        // 计算整个树的最大深度
+        nodeMaxDepth = leftTreeMaxDepth >= rightTreeMaxDepth ? leftTreeMaxDepth + 1 : rightTreeMaxDepth + 1;
+        return nodeMaxDepth;
+    }
+
+    /**
      * 查找整个树中最下的键
      * @return
      */
