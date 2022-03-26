@@ -186,6 +186,68 @@ public class BinaryTree<K extends Comparable<K>, V> {
     }
 
     /**
+     * 二叉树中序遍历
+     * @return
+     */
+    public Queue<K> middleErgodic() {
+        Queue<K> queue = new Queue<>();
+        middleErgodic(root, queue);
+        return queue;
+    }
+
+    /**
+     * 二叉树中序遍历
+     * @param x
+     * @param keys
+     */
+    public void middleErgodic(Node x, Queue<K> keys) {
+        if (x == null) {
+            return;
+        }
+        // 递归遍历x节点的左子树
+        if(x.left != null) {
+            middleErgodic(x.left, keys);
+        }
+        // 把x节点的key放入队列keys中
+        keys.enqueue(x.key);
+        // 递归遍历x节点的右子树
+        if (x.right != null) {
+            middleErgodic(x.right, keys);
+        }
+    }
+
+    /**
+     * 二叉树中序遍历
+     * @return
+     */
+    public Queue<K> afterErgodic() {
+        Queue<K> queue = new Queue<>();
+        afterErgodic(root, queue);
+        return queue;
+    }
+
+    /**
+     * 二叉树中序遍历
+     * @param x
+     * @param keys
+     */
+    public void afterErgodic(Node x, Queue<K> keys) {
+        if (x == null) {
+            return;
+        }
+        // 递归遍历x节点的左子树
+        if(x.left != null) {
+            afterErgodic(x.left, keys);
+        }
+        // 递归遍历x节点的右子树
+        if (x.right != null) {
+            afterErgodic(x.right, keys);
+        }
+        // 把x节点的key放入队列keys中
+        keys.enqueue(x.key);
+    }
+
+    /**
      * 查找整个树中最下的键
      * @return
      */

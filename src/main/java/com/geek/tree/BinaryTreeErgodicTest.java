@@ -21,8 +21,14 @@ public class BinaryTreeErgodicTest {
         tree.put("H", "8");
         tree.put("C", "3");
 
-        preErgodic(tree);
+//        preErgodic(tree);
+
+//        middleErgodic(tree);
+
+        afterErgodic(tree);
     }
+
+
 
     /**
      * 二叉树前序遍历
@@ -30,6 +36,20 @@ public class BinaryTreeErgodicTest {
      */
     private static void preErgodic(BinaryTree<String, String> tree) {
         Queue<String> keys = tree.preErgodic();
+        iteration(tree, keys);
+    }
+
+    private static void middleErgodic(BinaryTree<String, String> tree) {
+        Queue<String> keys = tree.middleErgodic();
+        iteration(tree, keys);
+    }
+
+    private static void afterErgodic(BinaryTree<String, String> tree) {
+        Queue<String> keys = tree.afterErgodic();
+        iteration(tree, keys);
+    }
+
+    private static void iteration(BinaryTree<String, String> tree, Queue<String> keys) {
         for (String key : keys) {
             String value = tree.get(key);
             System.out.println(key + "------" + value);
