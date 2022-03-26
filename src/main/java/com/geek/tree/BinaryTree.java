@@ -1,5 +1,8 @@
 package com.geek.tree;
 
+
+import com.geek.list.linked.Queue;
+
 /**
  * @author: lucas.zhao@kuhantech.com
  * @date: 2022/1/3 16:57
@@ -146,6 +149,85 @@ public class BinaryTree<K extends Comparable<K>, V> {
         }
         return node;
     }
+
+    /**
+     * 前序遍历
+     * @return 获取整个树中所有的键
+     */
+    public Queue<K> preErgodic() {
+        Queue<K> queue = new Queue<>();
+        preErgodic(root, queue);
+        return queue;
+    }
+
+    /**
+     * 前序遍历
+     * 获取指定树x中所有的键，并把所有的键放到keys队列中
+     * @param x
+     * @param keys
+     */
+    public void preErgodic(Node x, Queue<K> keys) {
+        // 递归方法出口
+        if (x == null) {
+            return;
+        }
+        // 把x节点的key放入队列keys中
+        keys.enqueue(x.key);
+
+        // 递归遍历x节点的左子树
+        if(x.left != null) {
+            preErgodic(x.left, keys);
+        }
+
+        // 递归遍历x节点的右子树
+        if (x.right != null) {
+            preErgodic(x.right, keys);
+        }
+    }
+
+    /**
+     * 查找整个树中最下的键
+     * @return
+     */
+    public K minKey() {
+        return root != null ? minNode(root).key : null;
+    }
+
+    /**
+     * 在指定树node中，查找最小键所在的节点
+     * @param node
+     * @return
+     */
+    public Node minNode(Node node) {
+        // 需要判断node节点还有没有左子节点，如果有则继续找左子树，如果没有则node节点就是最小键所在节点
+        if (node.left != null) {
+            return minNode(node.left);
+        } else {
+            return node;
+        }
+    }
+
+    /**
+     * 在整个树中找到最大的键
+     * @return
+     */
+    public K maxKey() {
+        return root != null ? maxNode(root).key : null;
+    }
+
+    /**
+     * 在node树中，找到最大键所在的节点
+     * @param node
+     * @return
+     */
+    public Node maxNode(Node node) {
+        if (node.right != null) {
+            return maxNode(node.right);
+        } else {
+            return node;
+        }
+    }
+
 
     private class Node {
         /**
