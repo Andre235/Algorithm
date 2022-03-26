@@ -217,7 +217,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * 二叉树中序遍历
+     * 二叉树后序遍历
      * @return
      */
     public Queue<K> afterErgodic() {
@@ -227,7 +227,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * 二叉树中序遍历
+     * 二叉树后序遍历
      * @param x
      * @param keys
      */
@@ -245,6 +245,36 @@ public class BinaryTree<K extends Comparable<K>, V> {
         }
         // 把x节点的key放入队列keys中
         keys.enqueue(x.key);
+    }
+
+    /**
+     * 使用层序遍历，获取整个树中所有的键
+     * @return
+     */
+    public Queue<K> layerErgodic() {
+        // 定义两个队列，分别存储树中的键和树中的节点
+        // 键队列
+        Queue<K> keys = new Queue<>();
+        // 节点队列
+        Queue<Node> nodes = new Queue<>();
+
+        // 刚开始往节点队列中放入根节点
+        nodes.enqueue(root);
+
+        while (!nodes.isEmpty()) {
+            // 从节点队列中弹出一个节点，并且把该节点的key放入键队列中
+            Node node = nodes.dequeue();
+            keys.enqueue(node.key);
+            // 判断该节点是否有左子节点，如果有则放入节点队列中
+            if (node.left != null) {
+                nodes.enqueue(node.left);
+            }
+            // 判断该节点是否有右子节点，如果有则放入节点队列中
+            if (node.right!= null) {
+                nodes.enqueue(node.right);
+            }
+        }
+        return keys;
     }
 
     /**

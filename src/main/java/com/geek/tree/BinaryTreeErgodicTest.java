@@ -25,9 +25,9 @@ public class BinaryTreeErgodicTest {
 
 //        middleErgodic(tree);
 
-        afterErgodic(tree);
+//        afterErgodic(tree);
+        layerErgodic(tree);
     }
-
 
 
     /**
@@ -46,6 +46,11 @@ public class BinaryTreeErgodicTest {
 
     private static void afterErgodic(BinaryTree<String, String> tree) {
         Queue<String> keys = tree.afterErgodic();
+        iteration(tree, keys);
+    }
+
+    private static void layerErgodic(BinaryTree<String, String> tree) {
+        Queue<String> keys = tree.layerErgodic();
         iteration(tree, keys);
     }
 
