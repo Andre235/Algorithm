@@ -17,7 +17,7 @@ public class Heap<T extends Comparable<T>> {
     private int count;
 
     public Heap(int capacity) {
-        this.items = (T[]) new Object[capacity];
+        this.items = (T[]) new Comparable[capacity + 1];
         this.count = 0;
     }
 
@@ -47,23 +47,23 @@ public class Heap<T extends Comparable<T>> {
      * @param t
      */
     public void insert(T t) {
-
+        items[++count] = t;
+        swim(count);
     }
 
     /**
      * 使用上浮算法，使索引k处的元素能在堆中处于正确的位置
-     * @param k
+     * @param k 节点所在的索引
      */
     public void swim(int k) {
-
-    }
-
-    /**
-     * 使用下沉算法，使索引k处的元素能在堆中处于正确的位置
-     * @param k
-     */
-    public void sink(int k) {
-
+        // 通过循环，不断比较当前节点的值和其父节点的值的大小，如果当前节点的值 > 父节点的值，则交换两个元素位置
+        // 数组是从下标1位置开始存储元素的
+        while (k > 1) {
+            if (less(k / 2, k)) {
+                exchange(k / 2, k);
+            }
+            k = k / 2;
+        }
     }
 
     /**
@@ -71,9 +71,43 @@ public class Heap<T extends Comparable<T>> {
      * @return
      */
     public T deleteMax() {
-        return null;
+        T max = items[1];
+        // 交换索引1处的元素和最大索引处的元素，让完全二叉树的最下层最右侧的元素(即刚才索引最大处的元素)称为临时根节点
+        exchange(1, count);
+        // 删除当前最大索引处的元素，置为null即可
+        items[count] = null;
+        // 元素个数 -1
+        count --;
+        // 通过下沉算法调整当前临时根节点的位置，使堆重新有序
+        sink(1);
+        return max;
     }
 
+    /**
+     * 使用下沉算法，使索引k处的元素能在堆中处于正确的位置
+     * @param k
+     */
+    public void sink(int k) {
+        // 通过循环不断比较当前k节点和其左子节点2*k 以及右子节点2*k+1处的较大值的元素的大小，如果过当前节点小，则交换其位置
+        while (2*k <= count) {
+            // 获取当前节点的子节点的较大节点
+            // 记录较大子节点所在的索引
+            int tempMaxIndex = 0;
+            // 如果当前节点存在右子节点，则进行比较
+            if (2*k + 1 <= count) {
+                tempMaxIndex = less(2*k + 1, 2*k) ? 2*k : 2*k + 1;
+            } else {
+                tempMaxIndex = 2*k;
+            }
+
+            // 比较当前节点和较大子节点的值
+            if(less(tempMaxIndex, k)) {
+                break;
+            }
+            exchange(k, tempMaxIndex);
+            k = tempMaxIndex;
+        }
+    }
 }
 
 
